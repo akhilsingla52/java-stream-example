@@ -1,17 +1,18 @@
 package com.stream;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import com.stream.dao.Comment;
 import com.stream.dao.Product;
 
 public class ShoppingStore {
-	static List<Product> products = new ArrayList<>();
-	static List<Product> prod;
+	static Collection<Product> products = new HashSet<>();
+	static Collection<Product> prod;
 	static Scanner scan;
 	static int ch;
 	
@@ -65,7 +66,7 @@ public class ShoppingStore {
 	public static String brandList() {
 		System.out.println("\n\nBrand List");
 		int count = 0;
-		Set<String> brands = new HashSet<>();
+		Collection<String> brands = new HashSet<>();
 		for(Product p:products)
 			brands.add(p.getProductBrand());
 		for(String b:brands)
@@ -127,8 +128,9 @@ public class ShoppingStore {
 	
 	public static void operations() {
 		do {
-			prod = new ArrayList<>();
-			prod.addAll(products);
+			prod = new HashSet<>();
+			products.stream().forEach( p -> prod.add(p.clone()) );
+			
 			switch(ch = menuList()) {
 				case 1:
 					prod.stream().sorted((p1,p2) -> p1.getProductID()-p2.getProductID()).forEach(System.out::println);

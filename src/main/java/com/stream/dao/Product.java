@@ -3,7 +3,7 @@ package com.stream.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product {
+public class Product implements Cloneable {
 	int productID;
 	String productName;
 	double productPrice;
@@ -110,4 +110,19 @@ public class Product {
 		//return productName + "\t\t" + productPrice + "\t\t" + productBrand + "\t\t" + productDescription + "\t\t" + productSupplier.getName() + "\t\t" + productSupplier.getCompany() + "\t\t" + productRating;
 		return String.format("%-5d %-20s %.2f \t %-20s %-20s %-20s %-20s %.1f",productID,productName,productPrice,productBrand,productDescription,productSupplier.getName(),productSupplier.getCompany(),productRating);
 	}
+	
+	@Override
+    public Product clone() {
+        Product clone = null;
+        try{
+            clone = (Product) super.clone();
+           
+        }catch(CloneNotSupportedException e){
+            throw new RuntimeException(e); 
+        }
+       
+        return clone;
+       
+    }
+
 }
