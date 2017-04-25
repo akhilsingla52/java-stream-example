@@ -107,8 +107,7 @@ public class Product implements Cloneable {
 
 	@Override
 	public String toString() {
-		//return productName + "\t\t" + productPrice + "\t\t" + productBrand + "\t\t" + productDescription + "\t\t" + productSupplier.getName() + "\t\t" + productSupplier.getCompany() + "\t\t" + productRating;
-		return String.format("%-5d %-20s %.2f \t %-20s %-20s %-20s %-20s %.1f",productID,productName,productPrice,productBrand,productDescription,productSupplier.getName(),productSupplier.getCompany(),productRating);
+		return String.format("%-20d %-20s %.2f \t\t %-20s %-25s %-20s %-20s %.1f",productID,productName,productPrice,productBrand,productDescription,productSupplier.getName(),productSupplier.getCompany(),productRating);
 	}
 	
 	@Override

@@ -1,9 +1,9 @@
 package com.stream;
 
+import java.awt.DisplayMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -52,17 +52,6 @@ public class ShoppingStore {
 		products.add(new Product(20, "K4 note", 12000.00, "Lenovo", "Latest Mobile", 1.5f,"Nilesh","Nilesh co",comments));
 	}
 	
-	public static void display() {
-		System.out.println("\n\nProduct ID\t"
-				+ "Product Name\t"
-				+ "Product Price\t"
-				+ "Product Brand\t"
-				+ "Product Description\t"
-				+ "Product Rating");
-		for(Product prod:products)
-			System.out.println(prod);
-	}
-	
 	public static String brandList() {
 		System.out.println("\n\nBrand List");
 		int count = 0;
@@ -79,6 +68,7 @@ public class ShoppingStore {
 	
 	public static void brandListOperation() {
 			String brand = brandList();
+			display();
 			products.stream().filter(p -> p.getProductBrand().equalsIgnoreCase(brand)).forEach(System.out::println);
 	}
 	
@@ -94,17 +84,21 @@ public class ShoppingStore {
 	}
 	
 	public static void priceListOperation() {
-			switch(ch = priceList()) {
+			switch(ch = priceList()) {			
 				case 1:
+					display();
 					products.stream().filter(p -> p.getProductPrice()>4999).filter(p -> p.getProductPrice()<10001).forEach(System.out::println);
 					break;
 				case 2:
+					display();
 					products.stream().filter(p -> p.getProductPrice()>9999).filter(p -> p.getProductPrice()<20001).forEach(System.out::println);
 					break;
 				case 3:
+					display();
 					products.stream().filter(p -> p.getProductPrice()>19999).filter(p -> p.getProductPrice()<40001).forEach(System.out::println);
 					break;
 				case 4:
+					display();
 					products.stream().filter(p -> p.getProductPrice()>39999).filter(p -> p.getProductPrice()<60001).forEach(System.out::println);
 					break;
 				default:
@@ -126,6 +120,18 @@ public class ShoppingStore {
 		return scan.nextInt();
 	}
 	
+	public static void display() {
+		System.out.format("\n\n%-20s %-20s %-22s %-20s %-25s %-20s %-20s %s\n",
+							"Product ID",
+							"Product Name",
+							"Product Price",
+							"Product Brand",
+							"Product Description",
+							"Supplier Name",
+							"Supplier Company",
+							"Product Rating");
+	}
+	
 	public static void operations() {
 		do {
 			prod = new HashSet<>();
@@ -133,24 +139,29 @@ public class ShoppingStore {
 			
 			switch(ch = menuList()) {
 				case 1:
+					display();
 					prod.stream().sorted((p1,p2) -> p1.getProductID()-p2.getProductID()).forEach(System.out::println);
 					break;
 				case 2:
+					display();
 					prod.stream().sorted((p1,p2) -> p1.getProductName().compareTo(p2.getProductName())).forEach(System.out::println);
 					break;
 				case 3:
 					brandListOperation();
 					break;
 				case 4:
+					display();
 					prod.stream().sorted((p1,p2) -> (int)(p1.getProductPrice()-p2.getProductPrice())).forEach(System.out::println);
 					break;
 				case 5:
 					priceListOperation();
 					break;
 				case 6:
+					display();
 					prod.stream().filter(p -> p.getProductPrice()>15000).map(p -> {p.setProductPrice(p.getProductPrice()*0.8); return p;}).forEach(System.out::println);
 					break;
 				case 7:
+					display();
 					prod.stream().filter(p -> p.getProductPrice()<15000).map(p -> {p.setProductPrice(p.getProductPrice()*0.9); return p;}).forEach(System.out::println);
 					break;
 				default:
